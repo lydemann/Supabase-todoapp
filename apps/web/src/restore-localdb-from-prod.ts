@@ -19,12 +19,7 @@ async function restoreSnapshotToLocalDb() {
     message: 'select a snapshot to restore',
     name: 'snapshot',
   });
-  console.log(snapshot);
 
-  // console.log('clearing current data');
-  // execSync(
-  //   'PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 54322 -f apps/web/src/clear-db.sql'
-  // );
   console.log(`Restoring snapshot ${snapshot}...`);
   execSync(
     `PGPASSWORD=postgres psql -U postgres -h 127.0.0.1 -p 54322 -f apps/web/supabase/snapshots/${snapshot}`
