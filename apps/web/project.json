@@ -67,9 +67,7 @@
     "create-prod-snapshot": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": [
-          "npx ts-node apps/web/src/create-snapshot-of-prod.ts"
-        ],
+        "commands": ["npx ts-node apps/web/src/create-snapshot-of-prod.ts"],
         "parallel": false
       }
     },
@@ -79,6 +77,22 @@
         "commands": [
           "npx ts-node apps/web/src/restore-localdb-from-prod.ts -P"
         ],
+        "parallel": false
+      }
+    },
+    "clone-prod-db-to-local": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx run web:create-prod-snapshot && nx run web:restore-localdb-from-prod"
+        ],
+        "parallel": false
+      }
+    },
+    "serve-local-db": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["npx supabase start"],
         "parallel": false
       }
     },
